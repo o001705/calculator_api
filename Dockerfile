@@ -1,11 +1,11 @@
 # Use an official OpenJDK runtime as a parent image
-FROM eclipse-temurin:17-jre-jammy
+FROM openjdk:11-jre-slim
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
 # Copy the executable JAR file from the target directory into the container
-COPY target/calculator-api-1.0-SNAPSHOT.jar app.jar
+COPY target/calculator-api-1.0-SNAPSHOT.jar /app/app.jar
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
