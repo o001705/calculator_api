@@ -1,0 +1,65 @@
+pipeline:
+  identifier: Build_o001705_calculator_api_1717819237729
+  name: Build calculator_api
+  orgIdentifier: default
+  projectIdentifier: calculator_api
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github
+        repoName: o001705/calculator_api
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          caching:
+            enabled: true
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    shell: Sh
+                    command: |-
+                      echo hello world
+                      java --version
+                      mvn --version
+                  timeout: ""
+                  type: Run
+              - step:
+                  type: RunTests
+                  name: RunTests_1
+                  identifier: RunTests_1
+                  spec:
+                    language: Java
+                    buildTool: Maven
+                    args: clean test
+                    runOnlySelectedTests: true
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - target/surefire-reports/*.xml
+                    enableTestSplitting: false
+              - step:
+                  type: Security
+                  name: Security scan
+                  identifier: Security_scan
+                  spec:
+                    privileged: true
+                    settings:
+                      policy_type: orchestratedScan
+                      scan_type: repository
+                      product_name: calculagor_api
+                      product_config_name: ev_Basic_Scan
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+        type: CI

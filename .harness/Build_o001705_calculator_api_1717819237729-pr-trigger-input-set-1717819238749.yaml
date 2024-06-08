@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_o001705_calculator_api_1717819237729-pr-trigger-input-set
+  identifier: Build_o001705_calculator_api_1717819237729prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: calculator_api
+  pipeline:
+    identifier: Build_o001705_calculator_api_1717819237729
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>

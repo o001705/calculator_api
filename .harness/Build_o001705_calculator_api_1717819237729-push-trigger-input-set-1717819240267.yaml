@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_o001705_calculator_api_1717819237729-push-trigger-input-set
+  identifier: Build_o001705_calculator_api_1717819237729pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: calculator_api
+  pipeline:
+    identifier: Build_o001705_calculator_api_1717819237729
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
