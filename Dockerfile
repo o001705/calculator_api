@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the executable JAR file from the target directory into the container
-COPY calculator-api-1.0-SNAPSHOT.jar /app/app.jar
+COPY ./target/calculator-api-1.0-SNAPSHOT.jar /app/app.jar
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
