@@ -11,4 +11,5 @@ infrastructureDefinition:
     cluster: calculator-api-gke-cluster
     namespace: calculator-api-namespace
     releaseName: release-<+INFRA_KEY_SHORT_ID>
+    provisioner: <+input>
   allowSimultaneousDeployments: false
