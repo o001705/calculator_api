@@ -1,0 +1,6 @@
+environment:
+  name: Pre Prod Environment in GCP
+  identifier: Pre_Prod_Environment_in_GCP
+  orgIdentifier: default
+  projectIdentifier: calculator_api
+  type: PreProduction
