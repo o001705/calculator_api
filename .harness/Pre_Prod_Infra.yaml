@@ -1,0 +1,14 @@
+infrastructureDefinition:
+  name: Pre Prod Infra
+  identifier: Pre_Prod_Infra
+  orgIdentifier: default
+  projectIdentifier: calculator_api
+  environmentRef: Pre_Prod_Environment_in_GCP
+  deploymentType: Kubernetes
+  type: KubernetesGcp
+  spec:
+    connectorRef: GCPConnector
+    cluster: calculator-api-gke-cluster
+    namespace: calculator-api-namespace
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
