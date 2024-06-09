@@ -1,0 +1,40 @@
+# bright-coyote-425316-u3
+# harness@bright-coyote-425316-u3.iam.gserviceaccount.com
+
+gcloud iam roles create harnessVpcFirewallManager \
+  --project bright-coyote-425316-u3 \
+  --permissions compute.networks.create,compute.networks.delete,compute.networks.get,compute.networks.list,compute.networks.update,compute.subnetworks.create,compute.subnetworks.delete,compute.subnetworks.get,compute.subnetworks.list,compute.subnetworks.update,compute.firewalls.create,compute.firewalls.delete,compute.firewalls.get,compute.firewalls.list,compute.firewalls.update \
+  --title "VPC and Firewall Manager" \
+  --description "Custom role for managing VPCs and firewall rules with least privilege."
+
+gcloud iam roles create harnessGkeClusterManager \
+  --project bright-coyote-425316-u3 \
+  --permissions container.clusters.create,container.clusters.delete,container.clusters.get,container.clusters.update,container.clusters.list,container.nodePools.create,container.nodePools.delete,container.nodePools.get,container.nodePools.list,container.nodePools.update,container.operations.get,container.operations.list,compute.instances.list,compute.instances.get,compute.instances.create,compute.instances.delete \
+  --title "GKE Cluster Manager" \
+  --description "Custom role for managing GKE clusters with least privilege."
+
+gcloud iam roles create harnessK8sResourceManager \
+  --project bright-coyote-425316-u3 \
+  --permissions container.deployments.create,container.deployments.delete,container.deployments.get,container.deployments.list,container.deployments.update,container.pods.create,container.pods.delete,container.pods.get,container.pods.list,container.pods.update,container.services.create,container.services.delete,container.services.get,container.services.list,container.services.update \
+  --title "Kubernetes Resource Manager" \
+  --description "Custom role for managing Kubernetes resources with least privilege."
+
+# Assign Custom GKE Cluster Manager role
+gcloud projects add-iam-policy-binding bright-coyote-425316-u3 \
+  --member=serviceAccount:harness@bright-coyote-425316-u3.iam.gserviceaccount.com \
+  --role=projects/bright-coyote-425316-u3/roles/harnessGkeClusterManager
+
+# Assign Custom VPC and Firewall Manager role
+gcloud projects add-iam-policy-binding bright-coyote-425316-u3 \
+  --member=serviceAccount:harness@bright-coyote-425316-u3.iam.gserviceaccount.com \
+  --role=projects/bright-coyote-425316-u3/roles/harnessVpcFirewallManager
+
+# Assign Custom Kubernetes Resource Manager role
+gcloud projects add-iam-policy-binding bright-coyote-425316-u3 \
+  --member=serviceAccount:harness@bright-coyote-425316-u3.iam.gserviceaccount.com \
+  --role=projects/bright-coyote-425316-u3/roles/harnessK8sResourceManager
+
+# Assign Service Account User role
+gcloud projects add-iam-policy-binding bright-coyote-425316-u3 \
+  --member=serviceAccount:harness@bright-coyote-425316-u3.iam.gserviceaccount.com \
+  --role=roles/iam.serviceAccountUser
